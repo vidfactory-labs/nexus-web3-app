@@ -11,8 +11,10 @@
   "dependencies": {
     "expo": "~51.0.0",
     "react": "18.2.0",
+    "react-dom": "18.2.0",
     "react-native": "0.74.0",
-    "@web3modal/wagmi-react-native": "^4.0.0",
+    "react-native-web": "~0.19.10",
+    "@web3modal/wagmi": "^4.0.0",
     "wagmi": "^2.0.0",
     "viem": "^2.0.0"
   },
