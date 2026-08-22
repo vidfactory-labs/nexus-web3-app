@@ -1,19 +1,22 @@
 /*
-  🌐 NEXUS - The Ultimate Decentralized Hub
-  🛡️ AI Shield Active | 💰 Fee Wallet Secured | 🔗 100+ Wallets
+  NEXUS - The Ultimate Decentralized Hub
+  AI Shield Active | Fee Wallet Secured | 100+ Wallets
+  VERSION: WEB / NETLIFY READY
 */
 
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView, TextInput, ActivityIndicator, SafeAreaView, Alert } from 'react-native';
-import { createWeb3Modal, defaultWagmiConfig, Web3Modal } from '@web3modal/wagmi/react-native';
+import React, { useState } from 'react';
+import {
+  StyleSheet, Text, View, TouchableOpacity, ScrollView,
+  TextInput, ActivityIndicator, SafeAreaView, Alert
+} from 'react-native';
+import { createWeb3Modal, defaultWagmiConfig, Web3Modal } from '@web3modal/wagmi/react';
 import { WagmiConfig, useAccount, useConnect, useDisconnect, useBalance, useSendTransaction } from 'wagmi';
 import { mainnet, arbitrum, polygon, base, optimism } from 'wagmi/chains';
 import { parseEther } from 'viem';
+import './App.css';
 
-// 🔐 SECURE CONFIG (Environment Variable se liya gaya)
-const projectId = '0a323b02e9cb58a0113f917d1713b0cc'; 
-
-// 👇 Aapka Fee Wallet (Secure .env se, agar nahi mila toh fallback address)
+// 🔐 SECURE CONFIG
+const projectId = '0a323b02e9cb58a0113f917d1713b0cc';
 const FEE_WALLET = process.env.REACT_APP_FEE_WALLET || '0xb643e24d540d008eac8ec6e89c57a2fd71d8515c';
 
 const metadata = {
