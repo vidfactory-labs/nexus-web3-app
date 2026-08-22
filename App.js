@@ -1,9 +1,11 @@
 /* 
-   NEXUS Web App - Pure Web Version
+   NEXUS Web App - Browser Ready Version
    AI Shield Active | Fee Wallet Secured | 100+ Wallets
+   Supported Browsers: Chrome, Safari, Firefox
 */
 
 import React, { useState } from 'react';
+import { createRoot } from 'react-dom/client';
 import { createWeb3Modal, defaultWagmiConfig, Web3Modal } from '@web3modal/wagmi/react';
 import { WagmiConfig, useAccount, useConnect, useDisconnect, useBalance, useSendTransaction } from 'wagmi';
 import { mainnet, arbitrum, polygon, base, optimism } from 'wagmi/chains';
@@ -113,4 +115,9 @@ export default function App() {
       </div>
     </WagmiConfig>
   );
-    }
+}
+
+// 🔥 IMPORTANT: App ko browser mein render karo
+const container = document.getElementById('root');
+const root = createRoot(container);
+root.render(<App />);
