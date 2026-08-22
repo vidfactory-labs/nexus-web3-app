@@ -7,7 +7,6 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     
-    <!-- ✅ PWA Config Links -->
     <link rel="manifest" href="/manifest.json" />
     <link rel="apple-touch-icon" href="/icon-192.png" />
     
@@ -20,24 +19,14 @@
     </style>
 </head>
 <body>
-    <!-- ✅ Import App.js here (Zaroori) -->
-    <script src="/App.js" type="module"></script>
-
-    <!-- Loader (App.js load hone se pehle) -->
-    <div class="loader" id="root">
-        <h1>⚡ NEXUS</h1>
-        <p>Loading Super App...</p>
+    <div id="root">
+        <div class="loader">
+            <h1>⚡ NEXUS</h1>
+            <p>Loading Super App...</p>
+        </div>
     </div>
 
-    <!-- ✅ Service Worker Registration -->
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/service-worker.js')
-                .then(reg => console.log('✅ NEXUS PWA Registered'))
-                .catch(err => console.log('❌ PWA Error:', err));
-            });
-        }
-    </script>
+    <!-- ✅ App.js import (Render ke liye) -->
+    <script type="module" src="/App.js"></script>
 </body>
 </html>
