@@ -1,34 +1,87 @@
-/* NEXUS - Premium Dark Theme */
-body { margin: 0; background: #0b0f19; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #0b0f19;
+  min-height: 100vh;
+  color: white;
+}
 
-/* Main Container */
-.nexus-container { max-width: 500px; margin: 0 auto; padding: 20px; min-height: 100vh; background: #0b0f19; }
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+}
 
-/* Header */
-.nexus-header { text-align: center; margin-bottom: 30px; }
-.nexus-logo { font-size: 2.8rem; font-weight: 900; color: #00ffcc; letter-spacing: 2px; text-shadow: 0 0 20px rgba(0,255,204,0.3); margin-bottom: 5px; }
-.nexus-tagline { color: #64748b; font-size: 0.9rem; letter-spacing: 1px; }
+.logo {
+  font-size: 3rem;
+  font-weight: 900;
+  color: #00ffcc;
+  letter-spacing: 2px;
+  text-shadow: 0 0 20px rgba(0,255,204,0.3);
+}
 
-/* Cards */
-.nexus-card { background: #1e293b; border-radius: 20px; padding: 20px; margin-bottom: 20px; border: 1px solid #334155; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
-.wallet-label { color: #94a3b8; font-size: 0.9rem; text-align: center; margin-bottom: 5px; }
-.wallet-balance { color: #00ffcc; font-size: 2.5rem; font-weight: bold; text-align: center; margin: 10px 0; }
-.wallet-address { color: #fff; font-size: 1.1rem; font-family: monospace; text-align: center; }
+.subtext { color: #64748b; font-size: 0.9rem; }
 
-/* Buttons */
-.nexus-btn { width: 100%; padding: 16px; border: none; border-radius: 14px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: all 0.3s ease; }
-.nexus-btn.primary { background: #00ffcc; color: #0b0f19; }
-.nexus-btn.primary:active { transform: scale(0.98); }
-.nexus-btn.danger { background: #ef4444; color: white; }
+.content { display: flex; flex-direction: column; gap: 20px; }
 
-/* Inputs */
-.nexus-input { width: 100%; background: #0f172a; padding: 16px; border: 1px solid #334155; border-radius: 12px; color: white; font-size: 1.2rem; margin-bottom: 15px; outline: none; }
-.nexus-input:focus { border-color: #00ffcc; }
+.card {
+  background: #1e293b;
+  border-radius: 20px;
+  padding: 20px;
+  border: 1px solid #334155;
+}
 
-/* Status & Security */
-.status-text { color: #64748b; text-align: center; margin-top: 15px; font-size: 0.9rem; }
-.shield-title { color: #00ffcc; font-size: 1.3rem; font-weight: bold; margin-bottom: 10px; }
-.shield-desc { color: #94a3b8; margin-bottom: 6px; font-size: 0.95rem; padding-left: 10px; }
+.walletLabel { color: #94a3b8; font-size: 0.9rem; text-align: center; }
+.balance { color: #00ffcc; font-size: 2.5rem; font-weight: bold; text-align: center; margin: 10px 0; }
 
-/* Footer */
-.nexus-footer { text-align: center; color: #334155; font-size: 0.8rem; padding: 20px 0; }
+.connectBtn {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 14px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  background: #00ffcc;
+  color: #0b0f19;
+}
+
+.disconnectBtn {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 14px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  background: #ef4444;
+  color: white;
+}
+
+.label { color: #94a3b8; font-size: 0.9rem; margin-bottom: 10px; }
+.input {
+  width: 100%;
+  background: #0f172a;
+  padding: 16px;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  color: white;
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+}
+
+.actionBtn {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 14px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  background: #00ffcc;
+  color: #0b0f19;
+}
+
+.status { color: #64748b; text-align: center; margin-top: 15px; }
+.shieldTitle { color: #00ffcc; font-size: 1.3rem; font-weight: bold; margin-bottom: 10px; }
+.shieldDesc { color: #94a3b8; margin-bottom: 6px; }
