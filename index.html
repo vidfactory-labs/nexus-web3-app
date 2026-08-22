@@ -7,26 +7,29 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     
-    <!-- ✅ PWA Config Links (Jo humne abhi banaye) -->
+    <!-- ✅ PWA Config Links -->
     <link rel="manifest" href="/manifest.json" />
     <link rel="apple-touch-icon" href="/icon-192.png" />
     
     <title>NEXUS Super App</title>
     <style>
-        /* Basic Loader Style */
-        body { margin: 0; background: #0b0f19; display: flex; align-items: center; justify-content: center; height: 100vh; color: #00ffcc; font-family: sans-serif; }
-        .loader { text-align: center; }
-        .loader h1 { font-size: 2.5rem; letter-spacing: 3px; }
-        .loader p { color: #64748b; }
+        body { margin: 0; background: #0b0f19; font-family: sans-serif; }
+        .loader { padding: 20px; }
+        .loader h1 { font-size: 2.5rem; color: #00ffcc; text-align: center; }
+        .loader p { color: #64748b; text-align: center; }
     </style>
 </head>
 <body>
+    <!-- ✅ Import App.js here (Zaroori) -->
+    <script src="/App.js" type="module"></script>
+
+    <!-- Loader (App.js load hone se pehle) -->
     <div class="loader" id="root">
         <h1>⚡ NEXUS</h1>
         <p>Loading Super App...</p>
     </div>
 
-    <!-- ✅ Service Worker Registration (PWA install ke liye) -->
+    <!-- ✅ Service Worker Registration -->
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
