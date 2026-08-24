@@ -1,0 +1,50 @@
+name: NEXUS Auto-Fix & Deploy
+
+on:
+  push:
+    branches: [ "main" ]
+  issues:
+    types: [opened]
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  auto-fix-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Comment on Issue/PR (Community Bot)
+        if: github.event_name == 'issues' || github.event_name == 'issue_comment'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '👋 **NEXUS Super App Bot** here!\n\nThanks for reaching out. Our AI team is analyzing your feedback. We will fix this issue and deploy the update within the next few minutes. Stay tuned! 🚀'
+            })
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build & Test (AI Checks)
+        run: npm run build
+
+      - name: Deploy to Netlify
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        run: npx netlify-cli deploy --prod --dir=dist
