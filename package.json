@@ -2,7 +2,9 @@
   "name": "nexus-web3-app",
   "version": "1.0.0",
   "scripts": {
-    "build": "vite build"
+    "build": "vite build",
+    "auto-fix": "npx eslint --fix . && npx prettier --write . && npm run build",
+    "deploy": "npx vercel --prod --yes --token=$VERCEL_TOKEN"
   },
   "dependencies": {
     "@web3modal/wagmi": "^4.0.0",
