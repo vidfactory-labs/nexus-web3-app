@@ -2,15 +2,14 @@
   "name": "nexus-web3-app",
   "version": "1.0.0",
   "scripts": {
-    "build": "vite build",
-    "auto-fix": "npx eslint --fix . && npx prettier --write . && npm run build"
+    "build": "vite build"
   },
   "dependencies": {
-    "@web3modal/wagmi": "^4.0.0",
-    "wagmi": "^2.0.0",
-    "viem": "^2.0.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "vite": "^5.4.21",
     "@vitejs/plugin-react": "^4.0.0"
   }
 }
