@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { WagmiProvider, createConfig, http } from 'wagmi';
+import { createConfig, http, WagmiProvider } from 'wagmi';
 import { mainnet, arbitrum, polygon, base, optimism } from 'wagmi/chains';
 import { useAccount, useConnect, useDisconnect, useBalance, useSendTransaction } from 'wagmi';
 import { parseEther } from 'viem';
 
 const BACKEND_URL = 'https://nexus-backend-production-f8e9.up.railway.app';
-const FEE_WALLET = process.env.REACT_APP_FEE_WALLET || '0xb643e24d540d008eac8ec6e89c57a2fd71d8515c';
+const FEE_WALLET = import.meta.env.VITE_FEE_WALLET || '0xb643e24d540d008eac8ec6e89c57a2fd71d8515c';
 
 const config = createConfig({
   chains: [mainnet, arbitrum, polygon, base, optimism],
